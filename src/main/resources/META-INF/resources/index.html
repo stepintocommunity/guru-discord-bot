@@ -1,171 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>guru-bot - 1.0-SNAPSHOT</title>
-    <style>
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            line-height: 1.5;
+<html lang="hu-HU">
+<head><title>Step into Guru Bot</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.0955012e.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.fdc1712a.png">
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/main.25a93bbf.css">
+    <script data-dapp-detection="">!function () {
+        let e = !1;
+
+        function n() {
+            if (!e) {
+                const n = document.createElement("meta");
+                n.name = "dapp-detected", document.head.appendChild(n), e = !0
+            }
         }
 
-        h1 {
-            font-size: 2.5rem;
+        if (window.hasOwnProperty("ethereum")) {
+            if (window.__disableDappDetectionInsertion = !0, void 0 === window.ethereum) return;
+            n()
+        } else {
+            var t = window.ethereum;
+            Object.defineProperty(window, "ethereum", {
+                configurable: !0, enumerable: !1, set: function (e) {
+                    window.__disableDappDetectionInsertion || n(), t = e
+                }, get: function () {
+                    if (!window.__disableDappDetectionInsertion) {
+                        const e = arguments.callee;
+                        e && e.caller && e.caller.toString && -1 !== e.caller.toString().indexOf("getOwnPropertyNames") || n()
+                    }
+                    return t
+                }
+            })
         }
-
-        h2 {
-            font-size: 2rem
-        }
-
-        h3 {
-            font-size: 1.75rem
-
-        }
-
-        h4 {
-            font-size: 1.5rem
-        }
-
-        h5 {
-            font-size: 1.25rem
-        }
-
-        h6 {
-            font-size: 1rem
-        }
-
-        .lead {
-            font-weight: 300;
-            font-size: 2rem;
-        }
-
-        .banner {
-            font-size: 2.7rem;
-            margin: 0;
-            padding: 2rem 1rem;
-            background-color: #0d1c2c;
-            color: white;
-        }
-
-        body {
-            margin: 0;
-            font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        }
-
-        code {
-            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 87.5%;
-            color: #e83e8c;
-            word-break: break-word;
-        }
-
-        .left-column {
-            padding: .75rem;
-            max-width: 75%;
-            min-width: 55%;
-        }
-
-        .right-column {
-            padding: .75rem;
-            max-width: 25%;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        li {
-            margin: 0.75rem;
-        }
-
-        .right-section {
-            margin-left: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        .right-section h3 {
-            padding-top: 0;
-            font-weight: 200;
-        }
-
-        .right-section ul {
-            border-left: 0.3rem solid #71aeef;
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .example-code {
-            border-left: 0.3rem solid #71aeef;
-            padding-left: 10px;
-        }
-
-        .example-code h3 {
-            font-weight: 200;
-        }
-    </style>
+    }();</script>
 </head>
 <body>
-
-<div class="banner lead">
-    Your new Cloud-Native application is ready!
-</div>
-
-<div class="container">
-    <div class="left-column">
-        <p class="lead"> Congratulations, you have created a new Quarkus cloud application.</p>
-
-        <h2>What is this page?</h2>
-
-        <p>This page is served by Quarkus. The source is in
-            <code>src/main/resources/META-INF/resources/index.html</code>.</p>
-
-        <h2>What are your next steps?</h2>
-
-        <p>If not already done, run the application in <em>dev mode</em> using: <code>./mvnw compile quarkus:dev</code>.
-        </p>
-        <ul>
-            <li>Your static assets are located in <code>src/main/resources/META-INF/resources</code>.</li>
-            <li>Configure your application in <code>src/main/resources/application.properties</code>.</li>
-            <li>Quarkus now ships with a <a href="/q/dev/">Dev UI</a> (available in dev mode only)</li>
-            <li>Play with the getting started example code located in <code>src/main/java</code>:</li>
-        </ul>
-        <div class="example-code">
-            <h3>RESTEasy JAX-RS example</h3>
-            <p>REST is easy peasy with this Hello World RESTEasy resource.</p>
-            <p><code>@Path: <a href="/hello" class="path-link" target="_blank">/hello</a></code></p>
-            <p><a href="https://quarkus.io/guides/getting-started#the-jax-rs-resources" class="guide-link"
-                  target="_blank">Related guide section...</a></p>
-        </div>
-
+<main>
+    <div class="landing">
+        <div class="logo"></div>
     </div>
-    <div class="right-column">
-        <div class="right-section">
-            <h3>Application</h3>
-            <ul>
-                <li>GroupId: <code>hu.stepintomeetups</code></li>
-                <li>ArtifactId: <code>guru-bot</code></li>
-                <li>Version: <code>1.0-SNAPSHOT</code></li>
-                <li>Quarkus Version: <code>1.13.7.Final</code></li>
-            </ul>
+    <div class="content">
+        <h1 align="center">Guru Discord Bot</h1>
+        <div align="center">
+            <strong>
+                Szerveren lévő jogosultságok/skillek kezelő botja a <a href="https://discord.gg/A5yC5Hhxrs">Step into
+                Community</a> Discord szerveren.
+            </strong>
         </div>
-        <div class="right-section">
-            <h3>Do you like Quarkus?</h3>
-            <ul>
-                <li>Go give it a star on <a href="https://github.com/quarkusio/quarkus">GitHub</a>.</li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h3>More reading</h3>
-            <ul>
-                <li><a href="https://quarkus.io/guides/maven-tooling.html" target="_blank">Setup your IDE</a></li>
-                <li><a href="https://quarkus.io/guides/getting-started.html" target="_blank">Getting started</a></li>
-                <li><a href="https://quarkus.io/guides/" target="_blank">All guides</a></li>
-                <li><a href="https://quarkus.io" target="_blank">Quarkus Web Site</a></li>
-            </ul>
+        <br/>
+        <div align="center">
+            <p><a href="https://discord.gg/A5yC5Hhxrs" rel="nofollow"><img
+                    src="https://camo.githubusercontent.com/7287b28c6ce24cc170f28a9ec947b53ee3df1167f5ec25ee07f76aa2ce8da7ca/68747470733a2f2f696d672e736869656c64732e696f2f646973636f72642f3834383934323130393139313936323636352e7376673f6c6162656c3d266c6f676f3d646973636f7264266c6f676f436f6c6f723d66666666666626636f6c6f723d373338394438266c6162656c436f6c6f723d364137454332"
+                    alt="Discord"
+                    data-canonical-src="https://img.shields.io/discord/848942109191962665.svg?label=&amp;logo=discord&amp;logoColor=ffffff&amp;color=7389D8&amp;labelColor=6A7EC2"
+                    style="max-width:100%;"></a></p>
         </div>
     </div>
-</div>
+</main>
 </body>
 </html>
