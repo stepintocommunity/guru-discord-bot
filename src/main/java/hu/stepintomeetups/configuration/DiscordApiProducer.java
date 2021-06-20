@@ -14,7 +14,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 /**
- *
+ * Producer class which is initiating a new {@link DiscordApi} instance, which can be used with injection in any CDI (ArC) managed class.
  */
 @Slf4j
 @ApplicationScoped
@@ -31,6 +31,10 @@ public class DiscordApiProducer {
 
     @Produces
     public DiscordApi discordApi() {
+        if (!botConfiguration.enabled()) {
+            log.debug("Log is disabled, no DiscordApi instance will be made");
+            return null;
+        }
         if (discordApi == null) {
             initDiscordApi();
         }

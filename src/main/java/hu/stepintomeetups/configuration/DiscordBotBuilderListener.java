@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 
 /**
- *
+ * Application scoped bean which is being initiated when the application starts.
  */
 @Slf4j
 @Startup
@@ -23,7 +23,7 @@ public class DiscordBotBuilderListener {
 
     @PostConstruct
     public void init() {
-        log.info("Starting bot...");
+        log.info("Starting application which triggers the bot initiation.");
     }
 
     @PreDestroy
