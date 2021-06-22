@@ -9,10 +9,13 @@ import org.javacord.api.listener.server.member.ServerMemberJoinListener;
 
 import javax.enterprise.context.ApplicationScoped;
 
+/**
+ * Listener which listens to member join events.
+ */
 @ApplicationScoped
 @DiscordMessageListener
 @RequiredArgsConstructor
-public class WelcomeUserListener implements ServerMemberJoinListener, MessageCreateListener {
+public class WelcomeUserListener implements ServerMemberJoinListener {
 
     private final WelcomeUserAction welcomeUserAction;
 
@@ -21,8 +24,4 @@ public class WelcomeUserListener implements ServerMemberJoinListener, MessageCre
         welcomeUserAction.welcomeUser(event.getUser());
     }
 
-    @Override
-    public void onMessageCreate(MessageCreateEvent event) {
-
-    }
 }

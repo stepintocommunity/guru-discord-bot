@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import java.util.stream.Collectors;
 
 /**
  * Producer class which is initiating a new {@link DiscordApi} instance, which can be used with injection in any CDI (ArC) managed class.
@@ -32,7 +33,7 @@ public class DiscordApiProducer {
     @Produces
     public DiscordApi discordApi() {
         if (!botConfiguration.enabled()) {
-            log.debug("Log is disabled, no DiscordApi instance will be made");
+            log.debug("Bot is disabled, no DiscordApi instance will be made");
             return null;
         }
         if (discordApi == null) {
@@ -46,7 +47,10 @@ public class DiscordApiProducer {
                 .setToken(botConfiguration.token())
                 .login()
                 .join();
-        listeners.forEach(discordApi::addListener);
+        listeners.forEach(listener -> {
+            log.debug("Registering listener:[{}]", listener.getClass().getSimpleName());
+            discordApi.addListener(listener);
+        });
         String botInvite = discordApi.createBotInvite(Permissions.fromBitmask(0).toBuilder()
                 .setAllowed(
                         PermissionType.MANAGE_ROLES,
@@ -62,6 +66,9 @@ public class DiscordApiProducer {
                 )
                 .build());
         log.info("Invite link for the bot:[{}]", botInvite);
+        log.info("Configured skills:[{}]", botConfiguration.skills().values().stream().map(skillConfig -> skillConfig.name() + " - " + skillConfig.roleAssociation() + " - " + skillConfig.emoji()).collect(Collectors.joining(",")));
+        log.info("Configured commands:[{}]", botConfiguration.commands().stream().map(botCommand -> botCommand.command() + " - " + botCommand.description()).collect(Collectors.joining(",")));
+        log.info("Configured messages:[{}]", String.join(",", botConfiguration.embedMessages().keySet()));
     }
 
 }

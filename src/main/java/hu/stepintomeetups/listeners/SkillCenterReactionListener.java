@@ -12,6 +12,9 @@ import org.javacord.api.listener.message.reaction.ReactionRemoveListener;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Listener which listens to reactions on messages by bot.
+ */
 @Slf4j
 @ApplicationScoped
 @DiscordMessageListener

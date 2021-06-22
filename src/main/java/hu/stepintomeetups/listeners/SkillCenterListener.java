@@ -1,6 +1,7 @@
 package hu.stepintomeetups.listeners;
 
 import com.vdurmont.emoji.EmojiParser;
+import hu.stepintomeetups.action.AvailableCommandsAction;
 import hu.stepintomeetups.action.RoleAssociationAction;
 import hu.stepintomeetups.action.SkillsAction;
 import hu.stepintomeetups.configuration.BotConfiguration;
@@ -16,13 +17,14 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Listener which listens to the 'commands', 'list-skills', 'i-know' and 'i-dont-know' commands.
  */
 @ApplicationScoped
 @DiscordMessageListener
 @RequiredArgsConstructor
 public class SkillCenterListener implements MessageCreateListener {
 
+    private static final String COMMANDS = "commands";
     private static final String SKILLS_COMMAND = "list-skills";
     private static final String I_KNOW_COMMAND = "i-know";
     private static final String I_DONT_KNOW_COMMAND = "i-dont-know";
@@ -30,6 +32,7 @@ public class SkillCenterListener implements MessageCreateListener {
     private final BotConfiguration botConfiguration;
     private final RoleAssociationAction roleAssociationAction;
     private final SkillsAction skillsAction;
+    private final AvailableCommandsAction availableCommandsAction;
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
@@ -37,7 +40,10 @@ public class SkillCenterListener implements MessageCreateListener {
         String content = message.getContent();
         message.getUserAuthor()
                 .ifPresent(user -> {
-                    if (content.startsWith(getPrefixedCommand(SKILLS_COMMAND))) {
+                    if (content.startsWith(getPrefixedCommand(COMMANDS))) {
+                        availableCommandsAction.sendAllCommandsToUser(user);
+                        message.addReaction(EmojiParser.parseToUnicode(":white_check_mark:"));
+                    } else if (content.startsWith(getPrefixedCommand(SKILLS_COMMAND))) {
                         skillsAction.sendKnownSkillsToUser(user);
                         message.addReaction(EmojiParser.parseToUnicode(":white_check_mark:"));
                     } else if (content.startsWith(getPrefixedCommand(I_KNOW_COMMAND))) {
@@ -52,11 +58,11 @@ public class SkillCenterListener implements MessageCreateListener {
                         message.addReaction(EmojiParser.parseToUnicode(":white_check_mark:"));
                     }
                 });
-
     }
 
     private String getPrefixedCommand(String command) {
         String commandPrefix = botConfiguration.commandPrefix();
         return commandPrefix != null && !commandPrefix.isBlank() ? "/" + commandPrefix + "-" + command : "/" + command;
     }
+
 }

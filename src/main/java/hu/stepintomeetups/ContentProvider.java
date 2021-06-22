@@ -6,10 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.text.MessageFormat;
 import java.util.Optional;
 
 /**
- *
+ * Content provider which resolves and creates {@link EmbedBuilder} instances from the bot configuration messages.
  */
 @Slf4j
 @ApplicationScoped
@@ -19,11 +20,18 @@ public class ContentProvider {
     private final BotConfiguration botConfiguration;
 
     /**
-     * @param key
-     * @return
+     * Finds and creates an {@link EmbedBuilder} object based on the incoming message key.
      */
     public EmbedBuilder getByContentKey(String key) {
-        return convertTo(botConfiguration.messages().get(key));
+        return convertTo(botConfiguration.embedMessages().get(key));
+    }
+
+    /**
+     * Finds and creates an {@link EmbedBuilder} object based on the incoming message key.
+     */
+    public String getMessageByKey(String key, Object... args) {
+        String template = botConfiguration.messages().get(key);
+        return MessageFormat.format(template, args);
     }
 
     private EmbedBuilder convertTo(BotConfiguration.EmbedMessage embedMessage) {

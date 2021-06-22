@@ -1,5 +1,6 @@
 package hu.stepintomeetups.action;
 
+import hu.stepintomeetups.ContentProvider;
 import hu.stepintomeetups.configuration.BotConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class RoleAssociationAction {
 
     private final DiscordApi discordApi;
     private final BotConfiguration botConfiguration;
+    private final ContentProvider contentProvider;
 
     /**
      * Adds a role to the user if the incoming emoji is known and associated with any role.
@@ -47,8 +49,9 @@ public class RoleAssociationAction {
     }
 
     /**
-     * @param user
-     * @param roleName
+     * Add given role to the given user.
+     * <p>
+     * If the role is not configured an error message will be sent to the user.
      */
     public void addRoleToUser(User user, String roleName) {
         discordApi.getRolesByNameIgnoreCase(roleName)
@@ -63,32 +66,39 @@ public class RoleAssociationAction {
     }
 
     /**
-     * @param user
-     * @param roles
+     * Add multiple roles to the given user.
+     * <p>
+     * If the role is not configured an error message will be sent to the user.
      */
     public void addRolesToUser(User user, List<String> roles) {
         roles.forEach(role -> {
             if (botConfiguration.skills().containsKey(role)) {
                 addRoleToUser(user, role);
+            } else {
+                sendMessageToCustomerAboutUnknownRole(user, role);
             }
         });
     }
 
     /**
-     * @param user
-     * @param roles
+     * Remove multiple roles from the given user.
+     * <p>
+     * If the role is not configured an error message will be sent to the user.
      */
     public void removeRolesFromUser(User user, List<String> roles) {
         roles.forEach(role -> {
             if (botConfiguration.skills().containsKey(role)) {
                 removeRoleFromUser(user, role);
+            } else {
+                sendMessageToCustomerAboutUnknownRole(user, role);
             }
         });
     }
 
     /**
-     * @param user
-     * @param roleName
+     * Remove a role from the given user.
+     * <p>
+     * If the role is not configured an error message will be sent to the user.
      */
     public void removeRoleFromUser(User user, String roleName) {
         discordApi.getRolesByNameIgnoreCase(roleName)
@@ -103,7 +113,8 @@ public class RoleAssociationAction {
     }
 
     private void sendMessageToCustomerAboutFailedRoleAssignment(User user, Object role) {
-        user.sendMessage("Hiba történt a **" + role + "** nyelvhez specifikus jog hozzárendelése közben, kérlek tudasd a hibát a moderátorokkal, hogy minél hamarabb javíthassák a hibát.")
+        String message = contentProvider.getMessageByKey("failed-role-association", role);
+        user.sendMessage(message)
                 .exceptionally(throwable -> {
                     log.warn("Error during sending message to user:[{}]", user);
                     return null;
@@ -111,7 +122,17 @@ public class RoleAssociationAction {
     }
 
     private void sendMessageToCustomerAboutFailedRoleDeletion(User user, Object role) {
-        user.sendMessage("Hiba történt a **" + role + "** nyelvhez specifikus jog törlése közben, kérlek tudasd a hibát a moderátorokkal, hogy minél hamarabb javíthassák a hibát.")
+        String message = contentProvider.getMessageByKey("failed-role-deletion", role);
+        user.sendMessage(message)
+                .exceptionally(throwable -> {
+                    log.warn("Error during sending message to user:[{}]", user);
+                    return null;
+                });
+    }
+
+    private void sendMessageToCustomerAboutUnknownRole(User user, Object role) {
+        String message = contentProvider.getMessageByKey("unknown-role", role);
+        user.sendMessage(message)
                 .exceptionally(throwable -> {
                     log.warn("Error during sending message to user:[{}]", user);
                     return null;

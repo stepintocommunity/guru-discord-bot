@@ -14,25 +14,27 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Action which welcomes new users on the server.
+ */
 @Slf4j
 @ApplicationScoped
 @RequiredArgsConstructor
 public class WelcomeUserAction {
 
-    protected static final String MESSAGE_KEY = "welcome";
-    private final DiscordApi discordApi;
+    private static final String MESSAGE_KEY = "welcome";
     private final BotConfiguration botConfiguration;
     private final ContentProvider contentProvider;
 
     /**
-     * @param user
+     * Welcomes the incoming user.
      */
     public void welcomeUser(User user) {
         sendWelcomeMessage(user);
     }
 
     /**
-     *
+     * Welcome user based on {@link MessageCreateEvent} object.
      */
     public void welcomeUser(MessageCreateEvent event) {
         if (event.getMessageAuthor().isBotUser()) {

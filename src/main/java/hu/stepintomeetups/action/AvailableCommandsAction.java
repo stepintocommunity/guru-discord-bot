@@ -1,33 +1,33 @@
 package hu.stepintomeetups.action;
 
+import hu.stepintomeetups.ContentProvider;
 import hu.stepintomeetups.configuration.BotConfiguration;
 import lombok.RequiredArgsConstructor;
+import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.entity.user.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Action which sends all the known commands.
+ */
 @ApplicationScoped
 @RequiredArgsConstructor
 public class AvailableCommandsAction {
 
+    private static final String MESSAGE_KEY = "commands";
     private final BotConfiguration botConfiguration;
+    private final ContentProvider contentProvider;
 
     /**
-     * @return
+     * Sends all supported commands to the user.
      */
-    public List<BotCommand> getAllAvailableCommands() {
-        return botConfiguration.commands()
-                .stream().map(botCommand -> BotCommand.builder()
-                        .command(getPrefixedCommand(botCommand.command()))
-                        .description(botCommand.description())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    private String getPrefixedCommand(String command) {
-        String commandPrefix = botConfiguration.commandPrefix();
-        return commandPrefix != null && !commandPrefix.isBlank() ? "/" + commandPrefix + "-" + command : "/" + command;
+    public void sendAllCommandsToUser(User user) {
+        EmbedBuilder embedBuilder = contentProvider.getByContentKey(MESSAGE_KEY);
+        botConfiguration.commands().forEach(botCommand -> embedBuilder.addField(botCommand.description(), botCommand.command()));
+        user.sendMessage(embedBuilder);
     }
 
 }
