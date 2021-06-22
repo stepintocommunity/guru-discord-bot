@@ -27,7 +27,7 @@ public class ContentProvider {
     }
 
     /**
-     * Finds and creates an {@link EmbedBuilder} object based on the incoming message key.
+     * Finds and creates a String object based on the incoming message key.
      */
     public String getMessageByKey(String key, Object... args) {
         String template = botConfiguration.messages().get(key);
