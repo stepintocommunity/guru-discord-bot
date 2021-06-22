@@ -16,7 +16,7 @@
 ## Funkcionalitás
 
 - Csatlakozó felhasználók üdvözlése, ami után reakciók segítségével tudják magukhoz rendelni a szerepköröket
-- A bot által nyújtott parancsok/súgó lekérése (`/help`)
+- A bot által nyújtott parancsok/súgó lekérése (`/skills`)
 - Szerepkörök/skillek listázása a szerveren (`/list-skills`)
 - Szerepkörök felhaszálóhoz rendelése (`/i-know`)
 - Szerepkörök törlése/visszautasítása (`/i-dont-know`)
