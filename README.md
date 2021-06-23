@@ -33,6 +33,7 @@ A projekt [Quarkus](https://quarkus.io) keretrendszerre épül és a [Javacord](
 A fordításhoz a következőkre van szükség:
 
   * Java 11 vagy afölötti verzió.
+  * Maven 3.6.x (A projekt tartalmaz egy wrapped Maven-t, használható az is)
 
 Ezután a tényleges fordítás (JAR összeállítása):
 
