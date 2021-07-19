@@ -1,7 +1,7 @@
 package hu.stepintomeetups.commands;
 
 import com.vdurmont.emoji.EmojiParser;
-import hu.stepintomeetups.action.AvailableCommandsAction;
+import hu.stepintomeetups.skills.action.AvailableCommandsAction;
 import lombok.RequiredArgsConstructor;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.event.message.CertainMessageEvent;

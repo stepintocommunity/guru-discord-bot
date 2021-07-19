@@ -1,6 +1,7 @@
-package hu.stepintomeetups.listeners;
+package hu.stepintomeetups.welcome.listeners;
 
-import hu.stepintomeetups.action.WelcomeUserAction;
+import hu.stepintomeetups.listeners.DiscordMessageListener;
+import hu.stepintomeetups.welcome.action.WelcomeUserAction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.event.message.MessageCreateEvent;

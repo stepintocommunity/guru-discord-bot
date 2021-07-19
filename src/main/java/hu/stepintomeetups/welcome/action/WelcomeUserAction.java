@@ -1,4 +1,4 @@
-package hu.stepintomeetups.action;
+package hu.stepintomeetups.welcome.action;
 
 import hu.stepintomeetups.ContentProvider;
 import hu.stepintomeetups.configuration.BotConfiguration;

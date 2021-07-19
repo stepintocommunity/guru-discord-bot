@@ -1,14 +1,12 @@
 package hu.stepintomeetups.commands;
 
 import com.vdurmont.emoji.EmojiParser;
-import hu.stepintomeetups.action.SkillsAction;
-import hu.stepintomeetups.configuration.BotConfiguration;
+import hu.stepintomeetups.skills.action.SkillsAction;
 import lombok.RequiredArgsConstructor;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.event.message.CertainMessageEvent;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 /**
  * Command which is listing the configured skills.

@@ -1,14 +1,12 @@
 package hu.stepintomeetups.commands;
 
 import com.vdurmont.emoji.EmojiParser;
-import hu.stepintomeetups.action.RoleAssociationAction;
-import hu.stepintomeetups.configuration.BotConfiguration;
+import hu.stepintomeetups.skills.action.RoleAssociationAction;
 import lombok.RequiredArgsConstructor;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.event.message.CertainMessageEvent;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 

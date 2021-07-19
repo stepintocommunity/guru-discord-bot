@@ -1,6 +1,7 @@
-package hu.stepintomeetups.listeners;
+package hu.stepintomeetups.skills.listeners;
 
-import hu.stepintomeetups.action.RoleAssociationAction;
+import hu.stepintomeetups.listeners.DiscordMessageListener;
+import hu.stepintomeetups.skills.action.RoleAssociationAction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.DiscordApi;
